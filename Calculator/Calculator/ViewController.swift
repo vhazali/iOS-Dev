@@ -15,7 +15,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var currDigitDisplay: UILabel!
 
     var isTyping = false
-    var operandStack = Array<Double>()
+    var brain = CalculatorController()
     
     //To dynamically access the curr display value
     var currDisplayValue:Double {
@@ -46,47 +46,42 @@ class ViewController: UIViewController {
             currDigitDisplay.text=digit
             isTyping = true
         }
-        
-        
-//        print("digit = \(digit)")
     }
     
     @IBAction func finishAppend() {
         isTyping = false
-        operandStack.append(currDisplayValue)
-        print("operandStack = \(operandStack)")
+        if let result = brain.pushOperand(currDisplayValue) {
+            currDisplayValue = result
+        } else {
+            currDisplayValue = 0
+        }
+        
+//        isTyping = false
+//        brain.pushOperand(currDisplayValue)
+//        if let result = brain.evaluate() {
+//            resDisplayValue = result
+//        }
+//        
     }
     
     @IBAction func operate(sender: UIButton) {
-        let operation = sender.currentTitle!
-        operationDisplay.text = operation
         if isTyping {
             finishAppend()
         }
-        switch operation {
-        case "x" : performBinaryOperation({ (op1: Double, op2: Double) -> Double in
-            return op1 * op2})
-        case "÷" : performBinaryOperation({(op1,op2) in op2 / op1})
-        case "+" : performBinaryOperation({$0 + $1})
-        case "-" : performBinaryOperation {$1 - $0}
-        case "√" : performUnaryOperation {sqrt($0)}
-        default: break
+        if let operation = sender.currentTitle {
+            if let result = brain.performOperation(operation) {
+                currDisplayValue = result
+            } else {
+                currDisplayValue = 0
+            }
         }
-        print("operandStack = \(operandStack)")
-    }
-    
-    func performBinaryOperation(operation: (Double,Double) -> Double) {
-        if operandStack.count >= 2 {
-            let res = operation(operandStack.removeLast(), operandStack.removeLast())
-            operandStack.append(res)
-            resDisplayValue = res
-        }
-    }
-    func performUnaryOperation(operation: Double -> Double) {
-        if operandStack.count >= 1 {
-            let res = operation(operandStack.removeLast())
-            operandStack.append(res)
-            resDisplayValue = res
-        }
+//        if isTyping {
+//            isTyping = false
+//            brain.pushOperand(currDisplayValue)
+//        }
+//        if let operation = sender.currentTitle {
+//            operationDisplay.text = operation
+//            brain.performOperation(operation);
+//        }
     }
 }
