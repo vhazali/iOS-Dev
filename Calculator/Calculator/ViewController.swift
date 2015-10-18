@@ -14,7 +14,28 @@ class ViewController: UIViewController {
     @IBOutlet weak var operationDisplay: UILabel!
     @IBOutlet weak var currDigitDisplay: UILabel!
 
-    var isTyping : Bool = false
+    var isTyping = false
+    var operandStack = Array<Double>()
+    
+    //To dynamically access the curr display value
+    var currDisplayValue:Double {
+        get {
+            return NSNumberFormatter().numberFromString(currDigitDisplay.text!)!.doubleValue
+        }
+        
+        set{
+            currDigitDisplay.text = "\(newValue)"
+        }
+    }
+    
+    var resDisplayValue: Double {
+        get{
+            return NSNumberFormatter().numberFromString(resultDisplay.text!)!.doubleValue
+        }
+        set{
+            resultDisplay.text = "\(newValue)"
+        }
+    }
     
     @IBAction func appendDigit(sender: UIButton) {
         let digit = sender.currentTitle!
@@ -27,6 +48,45 @@ class ViewController: UIViewController {
         }
         
         
-        print("digit = \(digit)")
+//        print("digit = \(digit)")
+    }
+    
+    @IBAction func finishAppend() {
+        isTyping = false
+        operandStack.append(currDisplayValue)
+        print("operandStack = \(operandStack)")
+    }
+    
+    @IBAction func operate(sender: UIButton) {
+        let operation = sender.currentTitle!
+        operationDisplay.text = operation
+        if isTyping {
+            finishAppend()
+        }
+        switch operation {
+        case "x" : performBinaryOperation({ (op1: Double, op2: Double) -> Double in
+            return op1 * op2})
+        case "÷" : performBinaryOperation({(op1,op2) in op2 / op1})
+        case "+" : performBinaryOperation({$0 + $1})
+        case "-" : performBinaryOperation {$1 - $0}
+        case "√" : performUnaryOperation {sqrt($0)}
+        default: break
+        }
+        print("operandStack = \(operandStack)")
+    }
+    
+    func performBinaryOperation(operation: (Double,Double) -> Double) {
+        if operandStack.count >= 2 {
+            let res = operation(operandStack.removeLast(), operandStack.removeLast())
+            operandStack.append(res)
+            resDisplayValue = res
+        }
+    }
+    func performUnaryOperation(operation: Double -> Double) {
+        if operandStack.count >= 1 {
+            let res = operation(operandStack.removeLast())
+            operandStack.append(res)
+            resDisplayValue = res
+        }
     }
 }
