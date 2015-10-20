@@ -13,6 +13,22 @@ class CalculatorController {
         case Operand (Double)
         case UnaryOperation (String, Double -> Double)
         case BinaryOperation (String, (Double,Double) -> Double)
+        
+        /**
+         * Similar to the java's toString method overriding
+        */
+        var description: String {
+            get {
+                switch self {
+                case .Operand(let operand):
+                    return "\(operand)"
+                case .UnaryOperation(let symbol,_) :
+                    return symbol
+                case .BinaryOperation(let symbol, _):
+                    return symbol
+                }
+            }
+        }
     }
     
     private var opStack = [Op]()
@@ -27,6 +43,36 @@ class CalculatorController {
         knownOps["-"] = Op.BinaryOperation("-") {$1 - $0}
         
         knownOps["√"] = Op.UnaryOperation("√", sqrt)
+    }
+    
+    typealias PropertyList = AnyObject
+    var program: PropertyList {
+        get{
+            
+            //Equivalent to the code below
+            return opStack.map {$0.description}
+//            
+//            var returnValue = Array<String>()
+//            for op in opStack {
+//                returnValue.append(op.description)
+//            }
+//            return returnValue
+        }
+        set{
+            //first check if the newValue is in the 
+            //correct format (i.e. Array of Strings)
+            if let opSymbols = newValue as? Array<String>{
+                var newOpStack = [Op]()
+                for opSymbol in opSymbols {
+                    if let op = knownOps[opSymbol] {
+                        newOpStack.append(op)
+                    } else if let operand = NSNumberFormatter().numberFromString(opSymbol)?.doubleValue {
+                        newOpStack.append(.Operand(operand))
+                    }
+                }
+                opStack = newOpStack
+            }
+        }
     }
     
     private func evaluate(ops: [Op]) -> (result: Double?, remainingOps: [Op]) {

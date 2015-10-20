@@ -55,13 +55,6 @@ class ViewController: UIViewController {
         } else {
             currDisplayValue = 0
         }
-        
-//        isTyping = false
-//        brain.pushOperand(currDisplayValue)
-//        if let result = brain.evaluate() {
-//            resDisplayValue = result
-//        }
-//        
     }
     
     @IBAction func operate(sender: UIButton) {
@@ -75,13 +68,5 @@ class ViewController: UIViewController {
                 currDisplayValue = 0
             }
         }
-//        if isTyping {
-//            isTyping = false
-//            brain.pushOperand(currDisplayValue)
-//        }
-//        if let operation = sender.currentTitle {
-//            operationDisplay.text = operation
-//            brain.performOperation(operation);
-//        }
     }
 }
