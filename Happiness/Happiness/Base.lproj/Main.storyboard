@@ -19,6 +19,11 @@
                             <view contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="zMb-Ba-eqx" customClass="FaceView" customModule="Happiness" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="scale">
+                                        <real key="value" value="0.5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -29,6 +34,9 @@
                             <constraint firstAttribute="trailing" secondItem="zMb-Ba-eqx" secondAttribute="trailing" id="PQf-DV-Hkl"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="faceView" destination="zMb-Ba-eqx" id="Y1C-UY-eMJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nov-vO-KQw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
