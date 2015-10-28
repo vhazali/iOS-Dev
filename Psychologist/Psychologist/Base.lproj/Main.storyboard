@@ -146,11 +146,11 @@
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="Tom-mV-Taj"/>
-                                <exclude reference="Jfe-NL-Tgv"/>
                                 <exclude reference="4hr-uY-SqG"/>
                                 <exclude reference="Swp-Kh-8rj"/>
                                 <exclude reference="2fl-kq-6sy"/>
                                 <exclude reference="xmt-jA-qqY"/>
+                                <exclude reference="Jfe-NL-Tgv"/>
                             </mask>
                         </variation>
                     </view>
@@ -179,7 +179,7 @@
         <!--How you feel-->
         <scene sceneID="wyJ-is-Jis">
             <objects>
-                <viewController id="avn-YN-fcl" customClass="HappinessViewController" customModule="Psychologist" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="avn-YN-fcl" customClass="DiagnosedHappinessViewController" customModule="Psychologist" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="upP-7b-Tmw"/>
                         <viewControllerLayoutGuide type="bottom" id="lyJ-y6-Dre"/>
@@ -210,7 +210,15 @@
                             <constraint firstAttribute="trailing" secondItem="f8g-UG-JPy" secondAttribute="trailing" id="mvc-Sh-5Ma"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="How you feel" id="hX7-FC-v8i"/>
+                    <navigationItem key="navigationItem" title="How you feel" id="hX7-FC-v8i">
+                        <barButtonItem key="rightBarButtonItem" title="History" id="Gjl-DN-9rQ">
+                            <connections>
+                                <segue destination="drm-k5-fOR" kind="popoverPresentation" identifier="showDiagnosticHistory" popoverAnchorBarButtonItem="Gjl-DN-9rQ" id="QrR-Sq-NPi">
+                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                </segue>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="faceView" destination="f8g-UG-JPy" id="gKE-N2-Agd"/>
                     </connections>
@@ -223,6 +231,55 @@
                 </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1977" y="456"/>
+        </scene>
+        <!--History View Controller-->
+        <scene sceneID="Nh6-AV-apf">
+            <objects>
+                <viewController id="drm-k5-fOR" customClass="HistoryViewController" customModule="Psychologist" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="wWl-KK-Pzc"/>
+                        <viewControllerLayoutGuide type="bottom" id="y9p-Kl-yHf"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="1xG-hP-8PL">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Hr7-Eq-Tbw">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Hr7-Eq-Tbw" firstAttribute="top" secondItem="wWl-KK-Pzc" secondAttribute="bottom" id="5AA-iF-TPb"/>
+                            <constraint firstItem="Hr7-Eq-Tbw" firstAttribute="top" secondItem="wWl-KK-Pzc" secondAttribute="bottom" constant="8" symbolic="YES" id="9Q3-FE-Brp"/>
+                            <constraint firstItem="Hr7-Eq-Tbw" firstAttribute="leading" secondItem="1xG-hP-8PL" secondAttribute="leadingMargin" id="NX1-ti-9JO"/>
+                            <constraint firstItem="y9p-Kl-yHf" firstAttribute="top" secondItem="Hr7-Eq-Tbw" secondAttribute="bottom" constant="27" id="Vv4-gd-iaC"/>
+                            <constraint firstItem="Hr7-Eq-Tbw" firstAttribute="trailing" secondItem="1xG-hP-8PL" secondAttribute="trailingMargin" id="h9n-1d-BGg"/>
+                            <constraint firstItem="Hr7-Eq-Tbw" firstAttribute="leading" secondItem="1xG-hP-8PL" secondAttribute="leading" id="laJ-JE-4uN"/>
+                            <constraint firstItem="Hr7-Eq-Tbw" firstAttribute="top" secondItem="1xG-hP-8PL" secondAttribute="top" id="uQq-Ox-uxW"/>
+                            <constraint firstAttribute="trailing" secondItem="Hr7-Eq-Tbw" secondAttribute="trailing" id="wjB-FB-Dii"/>
+                            <constraint firstItem="Hr7-Eq-Tbw" firstAttribute="bottom" secondItem="y9p-Kl-yHf" secondAttribute="top" id="ySo-c6-ysJ"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="5AA-iF-TPb"/>
+                                <exclude reference="9Q3-FE-Brp"/>
+                                <exclude reference="NX1-ti-9JO"/>
+                                <exclude reference="h9n-1d-BGg"/>
+                                <exclude reference="Vv4-gd-iaC"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="textView" destination="Hr7-Eq-Tbw" id="mSu-Dx-6VE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mBl-wh-smE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2744" y="456"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="OX1-5e-tbh">
@@ -262,6 +319,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="V3w-x7-Ecm"/>
+        <segue reference="2iU-Ck-FE5"/>
     </inferredMetricsTieBreakers>
 </document>
